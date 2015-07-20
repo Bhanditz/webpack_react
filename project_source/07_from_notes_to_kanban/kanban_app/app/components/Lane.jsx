@@ -1,4 +1,5 @@
 import AltContainer from 'alt/AltContainer';
+import makeHot from 'alt/utils/makeHot';
 import React from 'react';
 
 import alt from '../libs/alt';
@@ -19,7 +20,8 @@ export default class Lane extends React.Component {
     this.actions = createNoteActions(alt);
 
     const storeName = 'NoteStore-' + this.props.i;
-    this.store = alt.createStore(NoteStore, storeName, this.actions);
+    // XXXXX: alt doesn't deal with params yet so this cannot work!
+    this.store = makeHot(alt, NoteStore, storeName, this.actions);
     this.actions.init(getInitialData(storeName));
   }
   render() {

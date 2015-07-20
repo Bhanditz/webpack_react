@@ -49,6 +49,8 @@ Next we will need to define a Store that maintains the data based on these actio
 **app/stores/NoteStore.js**
 
 ```javascript
+import makeHot from 'alt/utils/makeHot';
+
 import alt from '../libs/alt';
 import NoteActions from '../actions/NoteActions';
 
@@ -81,8 +83,10 @@ class NoteStore {
   }
 }
 
-export default alt.createStore(NoteStore);
+export default makeHot(alt, NoteStore, 'NoteStore');
 ```
+
+Given we're using hot loading in our application, we'll need to patch our store. If you don't care about hot loading you can use a declaration such as `export default alt.createStore(NoteStore);`.
 
 `bindActions` is a shortcut that allows us to map Action handlers automatically based on name. We need to use a factory in order to pass Actions to Store.
 

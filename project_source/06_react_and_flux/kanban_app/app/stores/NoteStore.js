@@ -1,3 +1,5 @@
+import makeHot from 'alt/utils/makeHot';
+
 import alt from '../libs/alt';
 import NoteActions from '../actions/NoteActions';
 
@@ -33,4 +35,4 @@ class NoteStore {
   }
 }
 
-export default alt.createStore(NoteStore);
+export default makeHot(alt, NoteStore, 'NoteStore');

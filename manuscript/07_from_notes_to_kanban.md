@@ -94,6 +94,8 @@ export default alt.generateActions('init', 'create');
 **app/stores/LaneStore.js**
 
 ```javascript
+import makeHot from 'alt/utils/makeHot';
+
 import alt from '../libs/alt';
 import LaneActions from '../actions/LaneActions';
 
@@ -115,7 +117,7 @@ class LaneStore {
   }
 }
 
-export default alt.createStore(LaneStore, 'LaneStore');
+export default makeHot(alt, LaneStore, 'LaneStore');
 ```
 
 The second parameter in `createStore` is a string that is used as a unique identifier for serializing/deserializing your store. The name of the store comes from the class name but on production due to heavy minification it is a good idea to provide your own name to avoid collisions.
@@ -264,6 +266,7 @@ To make it all work together we need to tweak `Lane` to maintain actions and a s
 
 ```javascript
 import AltContainer from 'alt/AltContainer';
+import makeHot from 'alt/utils/makeHot';
 import React from 'react';
 
 import alt from '../libs/alt';
@@ -282,7 +285,7 @@ export default class Lane extends React.Component {
     this.actions = createNoteActions(alt);
 
     const storeName = 'NoteStore-' + this.props.i;
-    this.store = alt.createStore(NoteStore, storeName, this.actions);
+    this.store = makeHot(alt, NoteStore, storeName, this.actions);
     this.actions.init(getInitialData(storeName));
   }
   render() {

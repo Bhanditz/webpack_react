@@ -1,3 +1,5 @@
+import makeHot from 'alt/utils/makeHot';
+
 import alt from '../libs/alt';
 import LaneActions from '../actions/LaneActions';
 
@@ -33,4 +35,4 @@ class LaneStore {
   }
 }
 
-export default alt.createStore(LaneStore);
+export default makeHot(alt, LaneStore, 'LaneStore');
